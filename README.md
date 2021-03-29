@@ -1,1 +1,1 @@
-# automatedTool
+# AutomatedTool

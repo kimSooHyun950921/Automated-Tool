@@ -76,6 +76,7 @@ def main(filename):
         print(get_45GOODS(data))
         print(get_42C(data))
         print(get_42A(data))
+        print(get_46A(data))
         
 if __name__ == "__main__":
     import argparse

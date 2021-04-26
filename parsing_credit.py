@@ -1,6 +1,20 @@
 import re
 import sys
 
+
+def get_46A(line):
+    start_pattern = re.compile("^(46A\W+DOCUMENTS\W+REQUIRED:\W+)(.+)", re.MULTILINE)
+    stop_pattern = re.compile("^(47A\W+ADDITIONAL\W+CONDITIONS:\W+)(.+)", re.MULTILINE)
+    start_search = start_pattern.search(line)
+    end_search = stop_pattern.search(line)
+    if start_pattern and end_search:
+        start_index = start_search.span(2)[0]
+        end_index = end_search.start()
+        result = line[start_index:end_index]
+        result = list(map(stripping, result.strip().split("\n")))
+        return result
+
+
 def get_45GOODS(line):
     start_pattern = re.compile("^(45A\W+GOODS:\W+)(.+)", re.MULTILINE)
     stop_pattern = re.compile("^(46A\W+DOCUMENTS REQUIRED:\W+)(.+)", re.MULTILINE)
@@ -17,6 +31,11 @@ def get_45GOODS(line):
 
 def get_42C(line):
     pattern = re.compile("(42C\W+DRAFTS\W+AT:\W+)(.+)")
+    return re.findall(pattern, line)[0][1]
+
+
+def get_42A(line):
+    pattern = re.compile("(42A\W+DRAWEE:\W+)(.+)")
     return re.findall(pattern, line)[0][1]
 
 
@@ -56,6 +75,7 @@ def main(filename):
         print(get_50APPLICANT(data))
         print(get_45GOODS(data))
         print(get_42C(data))
+        print(get_42A(data))
         
 if __name__ == "__main__":
     import argparse

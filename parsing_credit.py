@@ -15,6 +15,11 @@ def get_45GOODS(line):
     return None
 
 
+def get_42C(line):
+    pattern = re.compile("(42C\W+DRAFTS\W+AT:\W+)(.+)")
+    return re.findall(pattern, line)[0][1]
+
+
 def get_20DC(line):
     pattern = re.compile("(20\W+DC\W+NO:\W+)(.+)")
     return re.findall(pattern, line)[0][1]
@@ -50,6 +55,7 @@ def main(filename):
         print(get_20DC(data))
         print(get_50APPLICANT(data))
         print(get_45GOODS(data))
+        print(get_42C(data))
         
 if __name__ == "__main__":
     import argparse

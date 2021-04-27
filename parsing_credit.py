@@ -2,7 +2,23 @@ import re
 import sys
 
 
+def find_bank_name(lines):
+    result = None
+    line = ' '.join(lines)
+    start_pattern = re.compile("(TO\W+THE\W+ORDER\W+OF)(.+)")
+    end_pattern = re.compile("(MARKED\W+FREIGHT\W+PREPAID)(.+)")
+    start_search = start_pattern.search(line)
+    end_search = end_pattern.search(line)
+    if start_search and end_search:
+        start_index = start_search.span(2)[0]
+        end_index = end_search.start()
+        result = line[start_index:end_index]
+        result = list(map(stripping, result.strip().split("\n")))[0]
+    return result
+
+
 def get_46A(line):
+    result = None
     start_pattern = re.compile("^(46A\W+DOCUMENTS\W+REQUIRED:\W+)(.+)", re.MULTILINE)
     stop_pattern = re.compile("^(47A\W+ADDITIONAL\W+CONDITIONS:\W+)(.+)", re.MULTILINE)
     start_search = start_pattern.search(line)
@@ -12,7 +28,8 @@ def get_46A(line):
         end_index = end_search.start()
         result = line[start_index:end_index]
         result = list(map(stripping, result.strip().split("\n")))
-        return result
+        result = find_bank_name(result)
+    return result
 
 
 def get_45GOODS(line):
@@ -77,7 +94,8 @@ def main(filename):
         print(get_42C(data))
         print(get_42A(data))
         print(get_46A(data))
-        
+
+
 if __name__ == "__main__":
     import argparse
     parser = argparse.ArgumentParser(description='file parser')

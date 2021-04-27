@@ -1,20 +1,23 @@
 import re
 import sys
 
+def get_31(line):
+    # TODO
+    pass
+
 
 def find_info(lines):
     result = None
-    print(lines)
     lines = ' '.join(lines)
-    pattern = re.compile('((\W)(\d\.\W)|-\W|\+)')
-    result = pattern.sub('\n', lines)
-
-    print(result)
-    #pattern = re.comile("('DRAWN\W+UNDER)")
-    
-        
-
-
+    sub_pattern = re.compile('((\W)(\d\.\W)|-\W|\+)')
+    target_pattern = re.compile('(.+DRAWN\W+UNDER\W)(.+)')
+    lines = sub_pattern.sub('\n', lines).split('\n')
+    for line in lines:
+        search = target_pattern.search(line)
+        if search:
+            result = search.group(2)
+            break
+    return result
 
 
 def get_47A(line):
@@ -26,10 +29,9 @@ def get_47A(line):
     if start_search and end_search:
         start_index = start_search.span(2)[0]
         end_index = end_search.start()
-        result = line[start_index:end_index]
-        result = list(map(stripping, result.strip().split("\n")))
-        find_info(result)
-        #result = find_info(' '.join(result[0:2]))
+        lines = line[start_index:end_index]
+        lines = list(map(stripping, lines.strip().split("\n")))
+        result = find_info(lines)
     return result
   
 
@@ -73,27 +75,36 @@ def get_45GOODS(line):
         end_index = end_search.start()
         result = line[start_index:end_index]
         result = list(map(stripping, result.strip().split("\n")))
+        result = [line.replace('+','') for line in result]
         return result
     return None
 
 
 def get_42C(line):
     pattern = re.compile("(42C\W+DRAFTS\W+AT:\W+)(.+)")
+    result = re.findall(pattern, line)
+    if result:
+        return result[0][1]
     return re.findall(pattern, line)[0][1]
 
 
 def get_42A(line):
     pattern = re.compile("(42A\W+DRAWEE:\W+)(.+)")
-    return re.findall(pattern, line)[0][1]
+    result = re.findall(pattern, line)
+    if result:
+        return result[0][1]
+    return None
 
 
 def get_20DC(line):
     pattern = re.compile("(20\W+DC\W+NO:\W+)(.+)")
-    return re.findall(pattern, line)[0][1]
+    result = re.findall(pattern, line)#[0][1]
+    if result:
+        return result[0][1]
+    return None
 
 
 def stripping(string):
-    #string = string.replace('+','')
     return string.strip()
 
 
@@ -119,13 +130,14 @@ def main(filename):
     parsing_data = dict()
     with open(filename, 'r') as reader:        
         data = reader.read()
-        #print(get_20DC(data))
-        #print(get_50APPLICANT(data))
-        #print(get_45GOODS(data))
-        #print(get_42C(data))
-        #print(get_42A(data))
-        #print(get_46A(data))
-        get_47A(data)
+        print("20DC", get_20DC(data))
+        print("50APP", get_50APPLICANT(data))
+        print("45GOOD", get_45GOODS(data))
+        print("42C", get_42C(data))
+        print("42A",get_42A(data))
+        print("46A",get_46A(data))
+        print("47A",get_47A(data))
+        print("31",get_31(data))
 
 
 if __name__ == "__main__":

@@ -1,9 +1,13 @@
 import re
 import sys
 
+
 def get_31(line):
-    # TODO
-    pass
+    date = ''
+    pattern = re.compile('(31C\W+DATE\WOF\WISSUE:\W+)(.+)')
+    if pattern:
+        date = pattern.search(line)
+    return date[2]
 
 
 def find_info(lines):
@@ -137,7 +141,7 @@ def main(filename):
         print("42A",get_42A(data))
         print("46A",get_46A(data))
         print("47A",get_47A(data))
-        print("31",get_31(data))
+        print("31C",get_31(data))
 
 
 if __name__ == "__main__":

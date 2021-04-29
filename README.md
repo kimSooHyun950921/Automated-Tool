@@ -13,5 +13,6 @@ git clone https://github.com/kimSooHyun950921/automatedTool.git
 python3 parsing_credint.py -f example.txt
 ```
 ## ChangeLog
-- 04/27 update parsing brach: parsing text file
+- 04/27 update parsing branch: parsing text file
+- 04/29 complete parsing branch: need validation
 

@@ -90,11 +90,12 @@ def get_45GOODS(line):
 
 
 def get_42C(line):
+    result = None
     pattern = re.compile("(42C\W+DRAFTS\W+AT:\W+)(.+)")
     result = re.findall(pattern, line)
     if result:
-        return result[0][1]
-    return re.findall(pattern, line)[0][1]
+        return result[0][1] + ' OF THIS BILL OF EXCHANGE'
+    return result
 
 
 def get_42A(line):

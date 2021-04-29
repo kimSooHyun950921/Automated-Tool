@@ -5,8 +5,13 @@ import sys
 def get_31(line):
     date = ''
     pattern = re.compile('(31C\W+DATE\WOF\WISSUE:\W+)(.+)')
+    hypen_pattern = re.compile('([0-9]+)([A-Z]+)([0-9]+)')
     if pattern:
         date = pattern.search(line)
+        print(
+            '-'.join(hypen_pattern.findall(date[2])[0])
+            )
+
     return date[2]
 
 

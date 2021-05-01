@@ -14,5 +14,5 @@ python3 parsing_credint.py -f example.txt
 ```
 ## ChangeLog
 - 04/27 update parsing branch: parsing text file
-- 04/29 complete parsing branch: need validation
-
+- 04/29 update creding parsing branch: need validation
+- 05/01 update parsing branch: add pdf reader module

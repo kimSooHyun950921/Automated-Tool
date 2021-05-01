@@ -9,3 +9,8 @@
         - 음.. 테스트코드를 만들어야하는지 고민이다.
         - 테스트하는것보다 만드는것이 오래걸리는데..
     - bl 파싱 시작해야함
+- 05 01
+    - 파싱 위해 pdfreader 모듈 가져옴
+        - 출처 코드: https://stackoverflow.com/questions/26494211/extracting-text-from-a-pdf-file-using-pdfminer-in-python
+    - pdf 파일의 값을 어떻게 가져오냐가 문제
+

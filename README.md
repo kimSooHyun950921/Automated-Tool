@@ -17,3 +17,4 @@ python3 parsing_credint.py -f example.txt
 - 04/29 update creding parsing branch: need validation
 - 05/01 update parsing branch: add pdf reader module
 - 05/04 update parsing branch: parsing pdf file
+- 05/10 update parsing branch: test and validation code

@@ -20,4 +20,3 @@ python3 parsing_credint.py -f example.txt
 - 05/04 merge parsing branch, left branch
 - 05/04 update excel branch: make two files
 - 05/10 update parsing branch: test and validation code
-

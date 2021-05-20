@@ -8,9 +8,8 @@ def get_31(line):
     hypen_pattern = re.compile('([0-9]+)([A-Z]+)([0-9]+)')
     if pattern:
         date = pattern.search(line)
-        print(
-            '-'.join(hypen_pattern.findall(date[2])[0])
-            )
+        return '-'.join(hypen_pattern.findall(date[2])[0])
+            
 
     return date[2]
 
@@ -98,12 +97,18 @@ def get_42C(line):
     return result
 
 
+
 def get_42A(line):
-    pattern = re.compile("(42A\W+DRAWEE:\W+)(.+)")
-    result = re.findall(pattern, line)
-    if result:
-        return result[0][1]
-    return None
+    result = []
+    pattern = re.compile("42[A-Z]\W+DRAWEE:(\W+.+\s)+",  re.MULTILINE)
+    match = pattern.search(line)
+    if match:
+        result = re.sub('42[A-Z]\W+DRAWEE:', '', match.group(0))
+        result = list(map(stripping, result.split("\n")))
+        len_result = len(result)
+        #print(list(map(stripping, result.split("\n"))))
+        return result[0:len_result-1]
+    return result
 
 
 def get_20DC(line):
@@ -115,6 +120,7 @@ def get_20DC(line):
 
 
 def stripping(string):
+    #string = re.sub('\.\.+', '',string)
     return string.strip()
 
 
@@ -140,14 +146,15 @@ def main(filename):
     parsing_data = dict()
     with open(filename, 'r') as reader:        
         data = reader.read()
-        print("20DC", get_20DC(data))
-        print("50APP", get_50APPLICANT(data))
-        print("45GOOD", get_45GOODS(data))
-        print("42C", get_42C(data))
-        print("42A",get_42A(data))
-        print("46A",get_46A(data))
-        print("47A",get_47A(data))
-        print("31C",get_31(data))
+        print("L/C NO.", get_20DC(data))
+        print("SOLD TO:", get_50APPLICANT(data))
+        print("COUNTRY OF ORIGIN:", get_45GOODS(data))
+        print("BOF 둘째줄: ", get_42C(data))
+        print("BOF TO: ",get_42A(data))
+        print("BOF DRAWN UNDER CASE1: ",get_46A(data))
+        print("BOF DRAWN UNDER CASE2: ",get_47A(data))
+        print("BOF DATED: ",get_31(data))
+    return ''
 
 
 if __name__ == "__main__":

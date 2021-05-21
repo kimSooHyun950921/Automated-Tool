@@ -21,6 +21,7 @@ python3 parsing_credint.py -f example.txt
 - 05/04 update excel branch: make two files
 - 05/10 update parsing branch: test and validation code
 - 05/20 merge parsing branch
+- 05/21 add write invoice packing list
 
 
 ## parsing branch ChangeLog
@@ -44,3 +45,4 @@ python3 parsing_credint.py -f example.txt
 - 05 10
     - 검증 중
     - 생각보다 너무 많은 예외상황이 있어 이경우 처리해주는 것이 필요해보인다.
+

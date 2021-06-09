@@ -23,6 +23,7 @@ python3 parsing_credint.py -f example.txt
 - 05/20 merge parsing branch
 - 05/21 add write invoice packing list
 - 05/27 add gui
+- 06/09 release v0.1
 
 
 ## parsing branch ChangeLog
@@ -46,4 +47,12 @@ python3 parsing_credint.py -f example.txt
 - 05 10
     - 검증 중
     - 생각보다 너무 많은 예외상황이 있어 이경우 처리해주는 것이 필요해보인다.
-
+- 06 09
+    - 릴리즈 버전 0.1 실행
+    - 바뀌어진 폴더에대하여 수정 필요
+    - 요구사항에 따라 코드 변경필요
+        - Date Picker
+        - Error 처리
+        - 기본 단어처리
+        - 클릭 -> 찾아보기 변경
+        - hypen 갯수줄이기
